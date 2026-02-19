@@ -29,16 +29,18 @@ export class PreSalaController{
         }
         try{
             const jugador = jwt.verify(token, process.env.JWT_SECRET);
-            console.log('Jugador entrando a la presala: ', jugador);
-            await PreSalaModel.ingresarJugador(idPresala, jugador.id);
+            const resultadoIngreso = await PreSalaModel.ingresarJugador(idPresala, jugador.id);
             const presala = await PreSalaModel.obtenerInfoPresala(idPresala);
-            console.log('Resultado de jugador ingresando a la sala ', idPresala, ': ', presala);
-            res.render(`presala${idPresala}`, {dataJugador: jugador, dataPresala: presala});
+            if (resultadoIngreso === jugador.id) {
+                res.render(`presala${idPresala}`, {dataPresala: presala, data:true});
+            }
+            res.render(`presala${idPresala}`, {dataPresala: presala, data:false});
         }catch(e){
             const newError = {}
             newError['message'] = e.message
             res.render('presala1', {
-                error: [newError]
+                error: [newError],
+                data:e.message
             })
         }
     }
