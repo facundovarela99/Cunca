@@ -1,0 +1,22 @@
+### REGISTRO
+
+POST http://localhost:1234/cunca/usuario/api/registro
+Content-Type: application/json
+
+{
+    "username":"facundiatovarela88",
+    "contrasenia":"Transapora321_",
+    "nombre":"Laucha",
+    "apellido":"Ledesma",
+    "correo":"fsdcunddavarela88@hotmail.com"
+}
+
+### LOGIN
+
+POST http://localhost:1234/cunca/login
+Content-Type: application/json
+
+{
+    "username":"facundavarela88@hotmail.com",
+    "contrasenia":"Transapora321_"
+}
