@@ -118,3 +118,9 @@ INSERT INTO presalas_x_jugadores (id_presala, id_jugador) VALUES (1, 5);
 -- SELECCIONAR EL ID, USERNAME DE JUGADORES Y PRE SALAS EN LAS QUE SE ENCUENTRAN
 
 SELECT jugadores.id AS idJugador, jugadores.username AS nombreUsuario, presalas.id AS idPresala FROM  jugadores JOIN presalas_x_jugadores ON jugadores.id = presalas_x_jugadores.id_jugador JOIN presalas ON presalas.id = presalas_x_jugadores.id_presala WHERE id_presala = 1; 
+
+-- LIMPIAR PRE SALAS
+
+UPDATE presalas SET presalas.cantidad_jugadores = 0 WHERE presalas.id > 0;
+
+DELETE FROM presalas_x_jugadores WHERE presalas_x_jugadores.id_presala > 0;

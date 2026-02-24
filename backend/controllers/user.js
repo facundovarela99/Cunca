@@ -1,24 +1,22 @@
-import { User } from "../models/mysql/user.js";
 import { validarNuevoUsuario } from "../schemas/userSchema.js";
 import { AuthService } from "../models/authService.js";
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from "url";
+import { PreSalaModel } from "../models/mysql/presala.js";
 
 dotenv.config({ path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../env') });
 
 
 export class UserController{
     static async index(req, res){
-        const token = req.cookies.access_token;
-        if (!token) {
+        const {user} = req.session;
+        if (!user) {
             return res.render('index');
         }
         try{
-            const data = jwt.verify(token, process.env.JWT_SECRET);
-            console.log('data en index: ', data);
-            res.render('home', {data: data});
+            res.render('home', {data: user});
         }catch(e){
             const data = undefined;
             res.render('index', {data: data});
@@ -26,13 +24,12 @@ export class UserController{
     }
 
     static async home(req, res){
-        const token = req.cookies.access_token;
-        if (!token) {
+        const {user} = req.session;
+        if (!user) {
             return res.render('index');
         }
         try{
-            const data = jwt.verify(token, process.env.JWT_SECRET);
-            res.render('home', {data: data});
+            res.render('home', {data: user});
         }catch(e){
             const data = undefined;
             res.render('index', {data: data});
@@ -100,7 +97,7 @@ export class UserController{
         }
     }
 
-    static logout(req, res){
-        res.clearCookie('access_token').json({message:'Has cerrado sesión exitosamente'})
+    static async logout(req, res){
+        res.clearCookie('access_token').render('index');
     }
 }

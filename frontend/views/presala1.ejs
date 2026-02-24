@@ -29,7 +29,7 @@
                         <button class="nav-link">Clasificaciones</button>
                         <button class="nav-link">About</button>
                         <button class="nav-link">Contacto</button>
-                        <button id="btnCerrarSesion" class="nav-link">Salir</button>
+                        <button id="btnCerrarSesion" class="nav-link" data-id="1">Salir</button>
                     </div>
                 </div>
             </div>
@@ -50,6 +50,7 @@
                             <%= jugador.nombre_jugador %>
                         </h2>
                         <% }) %>
+                        <button id="btnSalirPresala" data-id="1" style="width: fit-content;">Salir</button>
                             <!-- <div class="d-flex flex-row justify-content-around p-4" style="background-color: rgb(124, 3, 124);">
                 <div class="divJugador1 m-4 p-4" style="background-color: brown;">
                     <h2>Jugador 1</h2>
