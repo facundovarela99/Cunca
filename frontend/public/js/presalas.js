@@ -1,8 +1,11 @@
 import { socket } from "./utils/socket.js";
 
 
-socket.on('cantidad', ({id, cantidad}) => {
-    document.getElementById(`cantidadJugadores-${id}`).innerHTML = `Cantidad jugadores: ${cantidad}`;
+socket.on('cantidad', (cantidad) => {
+    console.log('Cantidad recibida en el front: ', cantidad);
+    for (const presala of cantidad) {
+        document.getElementById(`cantidadJugadores-${presala.id}`).innerHTML = `Cantidad jugadores: ${presala.cantidad_jugadores}`;
+    }
 })
 
 const btnSalas = document.querySelectorAll('.btnSala');

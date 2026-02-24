@@ -33,28 +33,12 @@
     </header>
     <main>
         <div class="d-flex flex-column">
-            <!-- <% data.forEach(sala => { %>
+             <% data.forEach(sala => { %>
                 <div>
                     <button class="btnSala" data-id="<%= sala.id %>">SALA <%= sala.id %></button>
-                    <p id="cantidadJugadores">Cantidad jugadores: 0</p>
+                    <p id="cantidadJugadores-<%= sala.id %>">Cantidad jugadores: <%= sala.cantidad_jugadores %></p>
                 </div>
-            <% }) %> -->
-            <div>
-                <button class="btnSala" data-id="1">SALA 1</button>
-                <p id="cantidadJugadores-1">Cantidad jugadores: 0</p>
-            </div>
-            <div>
-                <button class="btnSala" data-id="2">SALA 2</button>
-                <p id="cantidadJugadores-2">Cantidad jugadores: 0</p>
-            </div>
-            <div>
-                <button class="btnSala" data-id="3">SALA 3</button>
-                <p id="cantidadJugadores-3">Cantidad jugadores: 0</p>
-            </div>
-            <div>
-                <button class="btnSala" data-id="4">SALA 4</button>
-                <p id="cantidadJugadores-4">Cantidad jugadores: 0</p>
-            </div>
+            <% }) %> 
         </div>
     </main>
 <!--BOOTSTRAP CDN-->

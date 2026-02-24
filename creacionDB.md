@@ -110,6 +110,7 @@ INSERT INTO presalas (cantidad_jugadores, cantidad_listos) VALUES
 (0, 0),
 (0, 0),
 (0, 0);
+(0, 0);
 
 -- A PARTIR DE AQUÍ COMIENZAN LAS CONSULTAS DE TESTEO (NO OBLIGATORIAS AL RECREAR LA BASE)
 
