@@ -1,7 +1,6 @@
-import { socket } from "./utils/socket.js";
+
 
 const btnLogout = document.getElementById('btnCerrarSesion');
-const btnRegistrarse = document.getElementById('btnRegistrarse');
 const btnPresalas = document.getElementById('btnPresalas');
 const btnHome = document.getElementById('btnHome');
 const btnSalirPresala = document.getElementById('btnSalirPresala');

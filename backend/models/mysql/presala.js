@@ -42,7 +42,7 @@ export class PreSalaModel{
 
     static async obtenerInfoPresala(idPresala){
         const [infoPresala] = await connection.query(
-            `SELECT p.id AS id_presala, j.id AS id_jugador, j.nombre AS nombre_jugador FROM presalas p
+            `SELECT p.id AS id_presala, j.id AS id_jugador, j.username AS nombre_jugador FROM presalas p
             JOIN presalas_x_jugadores pj ON p.id = pj.id_presala
             JOIN jugadores j ON pj.id_jugador = j.id
             WHERE p.id = (?);`, [idPresala]

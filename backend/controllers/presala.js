@@ -35,6 +35,7 @@ export class PreSalaController{
             console.log('cantidadJugadoresPresalas al entrar: ', cantidadJugadoresPresalas);
             console.log('INFO PRE SALA OBTENIDA AL ENTRAR A LA SALA: ', idPresala, ': ', presala);
             io.emit('cantidad', cantidadJugadoresPresalas);
+            io.emit('jugadores', presala);
             res.render(`presala${idPresala}`, {dataPresala: presala, data:true});
         }catch(e){
             const newError = {}
@@ -59,7 +60,8 @@ export class PreSalaController{
             const infoPresala = await PreSalaModel.obtenerInfoPresala(idPresala);
             console.log('infoPresala al salir: ', infoPresala);
             console.log('cantidadJugadoresPresalas al salir: ', cantidadJugadoresPresalas);
-            io.emit('cantidad', cantidadJugadoresPresalas)
+            io.emit('cantidad', cantidadJugadoresPresalas);
+            io.emit('jugadores', infoPresala);
             console.log('cantidad: ', infoPresala.length)
             return res.render('presalas', {data: cantidadJugadoresPresalas});
         }catch(e){
