@@ -5,8 +5,6 @@ const connection = await mysql.createConnection(config);
 
 export class PreSalaModel{
     static async ingresarJugador(idPresala, idJugador){
-        
-         
         const [info] =  await connection.query(
             `SELECT * FROM presalas_x_jugadores WHERE id_jugador = (?);`, [idJugador]
         )
@@ -33,19 +31,29 @@ export class PreSalaModel{
         
     }
 
-    static async obtenerJugadoresPresalas(){
+    static async obtenerCantidadJugadoresPresalas(){
         const [cantidadJugadores] = await connection.query(
             `SELECT id, cantidad_jugadores FROM presalas;`
         )
         return cantidadJugadores;
     }
 
+    static async InfoJugadorPresala(idPresala, idJugador){
+        const [infoPresala] = await connection.query(
+            `SELECT p.id AS id_presala, j.id AS id_jugador, j.username AS nombre_jugador FROM presalas p
+            JOIN presalas_x_jugadores pj ON p.id = pj.id_presala
+            JOIN jugadores j ON pj.id_jugador = j.id
+            WHERE p.id = (?) AND pj.id_jugador = (?);`, [idPresala, idJugador]
+        )
+        return infoPresala;
+    }
+    
     static async obtenerInfoPresala(idPresala){
         const [infoPresala] = await connection.query(
             `SELECT p.id AS id_presala, j.id AS id_jugador, j.username AS nombre_jugador FROM presalas p
             JOIN presalas_x_jugadores pj ON p.id = pj.id_presala
             JOIN jugadores j ON pj.id_jugador = j.id
-            WHERE p.id = (?);`, [idPresala]
+            WHERE p.id = (?) ORDER BY pj.fecha_ingreso;`, [idPresala]
         )
         return infoPresala;
     }

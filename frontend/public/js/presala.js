@@ -1,4 +1,27 @@
+import { socket } from './utils/socket.js';
 
+socket.on('presala', (presala) => {
+    console.log('Jugador recibido en el front: ', presala);
+    const jugadorEnSala = presala.jugadores.some(j => j.id_jugador === presala.jugador[0].id_jugador);
+    console.log('Jugador en sala: ', jugadorEnSala);
+    if (!jugadorEnSala) {
+        const jugador = presala.jugador[0];
+        const divJugador = document.createElement('div');
+        divJugador.innerHTML=`<h2>Nombre jugador: ${jugador.nombre_jugador}</h2>`
+        document.querySelector('.nombresJugadores').appendChild(divJugador);
+    }
+})
+
+socket.on('presalaMenosUno', (presala)=>{
+    console.log('presalaMenosUno recibida en el front: ', presala);
+    const nombresJugadores = document.querySelector('.nombresJugadores');
+    nombresJugadores.innerHTML = '';
+    presala.forEach(jugador=>{
+        const divJugador = document.createElement('div');
+        divJugador.innerHTML = `<h2>Nombre jugador: ${jugador.nombre_jugador}</h2>`;
+        nombresJugadores.appendChild(divJugador);
+    })
+})
 
 const btnLogout = document.getElementById('btnCerrarSesion');
 const btnPresalas = document.getElementById('btnPresalas');

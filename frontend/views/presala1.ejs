@@ -46,7 +46,12 @@
             <% } else { %>
                 <div class="d-flex flex-column">
                     <div class="nombresJugadores">
-                        <div class="divJugador1">
+                        <% dataPresala.forEach(jugador =>{ %>
+                            <div class="divJugador">
+                                <h2 id="nombreJugador">Nombre jugador: <%= jugador.nombre_jugador %></h2>
+                            </div>
+                        <% }) %>
+                        <!-- <div class="divJugador1">
                             <h2 id="jugador-1">Jugador 1: </h2>
                         </div>
                         <div class="divJugador2">
@@ -57,7 +62,7 @@
                         </div>
                         <div class="divJugador4">
                             <h2 id="jugador-4">Jugador 4: </h2>
-                        </div>
+                        </div> -->
                     </div>
                     <button id="btnSalirPresala" data-id="1" style="width: fit-content;">Salir</button>
                     <!-- <div class="d-flex flex-row justify-content-around p-4" style="background-color: rgb(124, 3, 124);">

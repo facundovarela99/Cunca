@@ -14,7 +14,7 @@ export class PreSalaController{
         if (!user) {
             return res.render('index');
         } else{
-            const cantidadJugadoresPresalas = await PreSalaModel.obtenerJugadoresPresalas();
+            const cantidadJugadoresPresalas = await PreSalaModel.obtenerCantidadJugadoresPresalas();
             console.log('Info de las presalas,  al entrar a presalas page: ', cantidadJugadoresPresalas)
             return res.render('presalas', {data: cantidadJugadoresPresalas});
         }
@@ -29,14 +29,16 @@ export class PreSalaController{
             return res.render('index');
         }
         try{
+            const presalaInfoPrevia = await PreSalaModel.obtenerInfoPresala(idPresala);
             await PreSalaModel.ingresarJugador(idPresala, user.id);
             const presala = await PreSalaModel.obtenerInfoPresala(idPresala);
-            const cantidadJugadoresPresalas = await PreSalaModel.obtenerJugadoresPresalas();
+            const cantidadJugadoresPresalas = await PreSalaModel.obtenerCantidadJugadoresPresalas();
+            const jugadorPresala = await PreSalaModel.InfoJugadorPresala(idPresala, user.id)
             console.log('cantidadJugadoresPresalas al entrar: ', cantidadJugadoresPresalas);
             console.log('INFO PRE SALA OBTENIDA AL ENTRAR A LA SALA: ', idPresala, ': ', presala);
             io.emit('cantidad', cantidadJugadoresPresalas);
-            io.emit('jugadores', presala);
-            res.render(`presala${idPresala}`, {dataPresala: presala, data:true});
+            io.emit('presala', {jugador: jugadorPresala, jugadores: presalaInfoPrevia});
+            res.render(`presala${idPresala}`, {dataPresala:presala, data:true});
         }catch(e){
             const newError = {}
             newError['message'] = e.message
@@ -56,12 +58,12 @@ export class PreSalaController{
         }
         try{
             await PreSalaModel.salirPreSala(idPresala, user.id);
-            const cantidadJugadoresPresalas = await PreSalaModel.obtenerJugadoresPresalas();
+            const cantidadJugadoresPresalas = await PreSalaModel.obtenerCantidadJugadoresPresalas();
             const infoPresala = await PreSalaModel.obtenerInfoPresala(idPresala);
             console.log('infoPresala al salir: ', infoPresala);
             console.log('cantidadJugadoresPresalas al salir: ', cantidadJugadoresPresalas);
             io.emit('cantidad', cantidadJugadoresPresalas);
-            io.emit('jugadores', infoPresala);
+            io.emit('presalaMenosUno', infoPresala);
             console.log('cantidad: ', infoPresala.length)
             return res.render('presalas', {data: cantidadJugadoresPresalas});
         }catch(e){

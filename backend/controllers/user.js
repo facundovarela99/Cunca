@@ -57,7 +57,7 @@ export class UserController{
                     httpOnly: true,
                     secure: false,
                     sameSite: 'lax',
-                    maxAge: 1000 * 60 * 60
+                    maxAge: 10000 * 60 * 60
                 })
                 .status(201)
                 .json({message: 'Registro exitoso'})

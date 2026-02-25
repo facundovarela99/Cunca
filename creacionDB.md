@@ -102,14 +102,14 @@ CREATE TABLE presalas (id INT PRIMARY KEY AUTO_INCREMENT, cantidad_jugadores INT
 
 -- TABLA INTERMEDIA jugadores y presalas (el id del jugador debe ser único, el mismo no puede repetirse en una misma sala)
 
-CREATE TABLE presalas_x_jugadores (id_presala INT, id_jugador INT, PRIMARY KEY (id_presala, id_jugador), FOREIGN KEY(id_presala) REFERENCES presalas(id), FOREIGN KEY(id_jugador) REFERENCES jugadores(id));
+CREATE TABLE presalas_x_jugadores (id_presala INT, id_jugador INT, PRIMARY KEY (id_presala, id_jugador), FOREIGN KEY(id_presala) REFERENCES presalas(id), FOREIGN KEY(id_jugador) REFERENCES jugadores(id), fecha_ingreso TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 -- INSERTAR PRE SALAS POR DEFAULT
 
 INSERT INTO presalas (cantidad_jugadores, cantidad_listos) VALUES
 (0, 0),
 (0, 0),
-(0, 0);
+(0, 0),
 (0, 0);
 
 -- A PARTIR DE AQUÍ COMIENZAN LAS CONSULTAS DE TESTEO (NO OBLIGATORIAS AL RECREAR LA BASE)
@@ -125,3 +125,5 @@ SELECT jugadores.id AS idJugador, jugadores.username AS nombreUsuario, presalas.
 UPDATE presalas SET presalas.cantidad_jugadores = 0 WHERE presalas.id > 0;
 
 DELETE FROM presalas_x_jugadores WHERE presalas_x_jugadores.id_presala > 0;
+
+//ASIGNAR NÚMEROS DE JUGADORES AL COMIENZO DE LA PARTIDA, NO EN PRE SALA
