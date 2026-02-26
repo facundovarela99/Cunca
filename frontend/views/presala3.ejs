@@ -43,13 +43,27 @@
             </div>
             <% } else { %>
                 <div class="d-flex flex-column">
-                    <% dataPresala.forEach(function(jugador) { %>
-                        <h2>
-                            <%= jugador.nombre_jugador %>
-                        </h2>
+                    <div class="nombresJugadoresSala3">
+                        <% dataPresala.forEach(jugador =>{ %>
+                            <div class="divJugador">
+                                <h2 id="nombreJugador">Nombre jugador: <%= jugador.nombre_jugador %></h2>
+                            </div>
                         <% }) %>
-                        <button id="btnSalirPresala" data-id="3" style="width: fit-content;">Salir</button>
-                            <!-- <div class="d-flex flex-row justify-content-around p-4" style="background-color: rgb(124, 3, 124);">
+                        <!-- <div class="divJugador1">
+                            <h2 id="jugador-1">Jugador 1: </h2>
+                        </div>
+                        <div class="divJugador2">
+                            <h2 id="jugador-2">Jugador 2: </h2>
+                        </div>
+                        <div class="divJugador3">
+                            <h2 id="jugador-3">Jugador 3: </h2>
+                        </div>
+                        <div class="divJugador4">
+                            <h2 id="jugador-4">Jugador 4: </h2>
+                        </div> -->
+                    </div>
+                    <button id="btnSalirPresala" data-id="3" style="width: fit-content;">Salir</button>
+                    <!-- <div class="d-flex flex-row justify-content-around p-4" style="background-color: rgb(124, 3, 124);">
                 <div class="divJugador1 m-4 p-4" style="background-color: brown;">
                     <h2>Jugador 1</h2>
                     <h2 style="color: rgba(240, 248, 255, 0);">Nombre de usuario</h2>

@@ -1,6 +1,6 @@
 import { socket } from './utils/socket.js';
 
-socket.on('presala', (presala) => {
+socket.on(`presala-${window.location.pathname.split('/')[3]}`, (presala) => {
     console.log('Jugador recibido en el front: ', presala);
     const jugadorEnSala = presala.jugadores.some(j => j.id_jugador === presala.jugador[0].id_jugador);
     console.log('Jugador en sala: ', jugadorEnSala);
@@ -8,13 +8,13 @@ socket.on('presala', (presala) => {
         const jugador = presala.jugador[0];
         const divJugador = document.createElement('div');
         divJugador.innerHTML=`<h2>Nombre jugador: ${jugador.nombre_jugador}</h2>`
-        document.querySelector('.nombresJugadores').appendChild(divJugador);
+        document.querySelector(`.nombresJugadoresSala${window.location.pathname.split('/')[3]}`).appendChild(divJugador);
     }
 })
 
-socket.on('presalaMenosUno', (presala)=>{
+socket.on(`presalaMenosUno-${window.location.pathname.split('/')[3]}`, (presala)=>{
     console.log('presalaMenosUno recibida en el front: ', presala);
-    const nombresJugadores = document.querySelector('.nombresJugadores');
+    const nombresJugadores = document.querySelector(`.nombresJugadoresSala${window.location.pathname.split('/')[3]}`);
     nombresJugadores.innerHTML = '';
     presala.forEach(jugador=>{
         const divJugador = document.createElement('div');
